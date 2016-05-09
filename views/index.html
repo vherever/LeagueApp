@@ -1,0 +1,49 @@
+<html>
+<head>
+    <title>League of Legends Stats Viewer</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+<body>
+    <div class="mainWrapper">
+        <%=title%>
+        <input type="text" placeholder="Search..." id="search">
+
+        <div class="results"></div>
+
+
+        <div id="tab1">
+            <div id="freeChampionsContainer"></div>
+        </div>
+
+        <div id="tab2">
+            <div id="summonerInfoContainer"></div>
+        </div>
+    </div>
+
+
+    <ul class='tabs'>
+        <li><a href='#tab1'>Tab 1</a></li>
+        <li><a href='#tab2'>Tab 2</a></li>
+        <li><a href='#tab3'>Tab 3</a></li>
+    </ul>
+
+
+
+    <script src="../public/libs/jquery.js"></script>
+    <script src="../public/libs/underscore.js"></script>
+    <script src="../public/app/app.js"></script>
+    <script src="../public/app/utils.js"></script>
+    <script src="../public/app/render_template.js"></script>
+
+    <script>
+        var ttt = '<%=title%>';
+
+        $(document).ready(function() {
+            initMyApp(ttt);
+        })
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<article class="card">
+    <header class="card__thumb">
+        <img src="http://ddragon.leagueoflegends.com/cdn/img/champion/loading/<%=d.lastPlayedChampion%>_0.jpg">
+    </header>
+    <div class="card__date">
+        <span class="card__date__day"><%=d.summonerLevel%></span>
+        <span class="card__date__month">Lvl</span>
+    </div>
+    <div class="card__body">
+        <div class="card__category"><%=d.summonerName%></div>
+        <!--<div class="card__title"><a href="#">Vivamus elementum semper nisivi troscup</a></div>-->
+        <div class="card__subtitle">
+            <table width="100%" class="summonerShortStatistics">
+                <tr>
+                    <td>
+                        <div>RANKED SOLO 5x5</div>
+                    </td>
+                    <td align="right">
+                        <div class="rankedStatistics">
+                            <div class="win">
+                                <% var rankedGamesSolo5x5 = _.findWhere(d.summonerSummaryData, {playerStatSummaryType: 'RankedSolo5x5'}) %>
+                                <%= rankedGamesSolo5x5.wins %>
+                                <div class="redFlag"></div>
+                            </div>
+                            <div class="defeat">
+                                <%=rankedGamesSolo5x5.losses%>
+                                <div class="blackFlag"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>UNRANKED</div>
+                    </td>
+                    <td align="right">
+                        <div class="unRankedStatistics">
+                            <div class="win">
+                                <% var unRankedGamesSolo5x5 = _.findWhere(d.summonerSummaryData, {playerStatSummaryType: 'Unranked'}) %>
+                                <%=unRankedGamesSolo5x5.wins%>
+                                <div class="redFlag"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <% var leagueData = d.summonerLeagueData[d.summonerId][0] %>
+        <% var divisionData = _.findWhere(leagueData.entries, {playerOrTeamId: leagueData.participantId}) %>
+        <p class="card__description">
+            <%= leagueData.tier %> <%=divisionData.division%>, <%=leagueData.name%>. <%=divisionData.leaguePoints%> league points
+        </p>
+    </div>
+    <footer class="card__footer">
+        <span class="icon icon--time">last time played, <%=d.lastTimePlayedHuman%> ago</span>
+    </footer>
+</article>

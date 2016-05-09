@@ -1,0 +1,11 @@
+<article class="card">
+<% var version = d.freeChampionsRotation.latestVersion; %>
+<% _.each(d.freeChampionsRotation.championsRotation, function(i) { %>
+
+    <div class="freeChampion">
+        <!--<%-i%><br>-->
+        <img src="http://ddragon.leagueoflegends.com/cdn/<%=version%>/img/champion/<%-i%>.png">
+    </div>
+
+<% }) %>
+</article>
