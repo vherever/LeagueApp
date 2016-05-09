@@ -8,18 +8,13 @@ var app = express();
 var cons = require('consolidate');
 var fs = require('fs');
 
-
-
 var LolApi = require('leagueapi');
 
 LolApi.init('f9c94bb0-ab09-4e26-9f82-2fc79b4a2255', 'euw');
 
-
-
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -28,7 +23,6 @@ app.use(express.static(path.join(__dirname, '/')));
 
 app.engine('html',cons.underscore);
 app.set('view engine', 'html');
-
 
 var d = {
     summonerBaseInfo: {
@@ -44,7 +38,6 @@ var d = {
     latestVersion: ''
 };
 
-
     app.get('/', function(req, res) {
         res.render('index', {title: 'League Of Legends Stats Viewer'});
     });
@@ -59,8 +52,8 @@ var d = {
             d.freeChampionsRotation = champs;
             d.freeChampionsRotationByName = [];
             var i,
-                j;
-            var z=0;
+                j,
+                z = 0;
             for(i = 0; j = d.freeChampionsRotation.length, i < j; i ++) {
                 LolApi.Static.getChampionById(d.freeChampionsRotation[i].id).then(function(data) {
                     d.freeChampionsRotationByName.push(data.key);
@@ -74,10 +67,6 @@ var d = {
 
     });
 
-
-
-
-
     app.get('/searching', function (req, res) {
         var val = req.query.search;
         LolApi.Summoner.getByName(val)
@@ -88,12 +77,10 @@ var d = {
                 d.summonerBaseInfo = data;
 
                 LolApi.Stats.getPlayerSummary(d.summonerBaseInfo.id, 'SEASON2016').then(function(playerSummary) {
-                     //console.log(playerSummary);
                     d.summonerSummaryData = playerSummary;
                 });
 
                 LolApi.getLeagueData(d.summonerBaseInfo.id).then(function(leagueData) {
-                    console.log(leagueData);
                     d.summonerLeagueData = leagueData;
                 });
 
@@ -117,10 +104,6 @@ var d = {
                 res.send(error);
             });
     });
-
-
-
-
 
 // run server
 http.createServer(app).listen(app.get('port'), function(){

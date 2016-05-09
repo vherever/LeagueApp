@@ -11,6 +11,8 @@
         <!--<div class="card__title"><a href="#">Vivamus elementum semper nisivi troscup</a></div>-->
         <div class="card__subtitle">
             <table width="100%" class="summonerShortStatistics">
+                <% var rankedGamesSolo5x5 = _.findWhere(d.summonerSummaryData, {playerStatSummaryType: 'RankedSolo5x5'}) %>
+                <% if(rankedGamesSolo5x5) { %>
                 <tr>
                     <td>
                         <div>RANKED SOLO 5x5</div>
@@ -18,20 +20,22 @@
                     <td align="right">
                         <div class="rankedStatistics">
                             <div class="win">
-                                <% var rankedGamesSolo5x5 = _.findWhere(d.summonerSummaryData, {playerStatSummaryType: 'RankedSolo5x5'}) %>
                                 <%= rankedGamesSolo5x5.wins %>
                                 <div class="redFlag"></div>
                             </div>
                             <div class="defeat">
+                                <% if(rankedGamesSolo5x5) { %>
                                 <%=rankedGamesSolo5x5.losses%>
                                 <div class="blackFlag"></div>
+                                <% } %>
                             </div>
                         </div>
                     </td>
                 </tr>
+                <% } %>
                 <tr>
                     <td>
-                        <div>UNRANKED</div>
+                        <div>NORMAL 5x5</div>
                     </td>
                     <td align="right">
                         <div class="unRankedStatistics">
@@ -45,11 +49,13 @@
                 </tr>
             </table>
         </div>
-        <% var leagueData = d.summonerLeagueData[d.summonerId][0] %>
-        <% var divisionData = _.findWhere(leagueData.entries, {playerOrTeamId: leagueData.participantId}) %>
+        <% var leagueData = d.summonerLeagueData[d.summonerId] %>
+        <% if(leagueData) { %>
+        <% var divisionData = _.findWhere(leagueData[0].entries, {playerOrTeamId: leagueData[0].participantId}) %>
         <p class="card__description">
-            <%= leagueData.tier %> <%=divisionData.division%>, <%=leagueData.name%>. <%=divisionData.leaguePoints%> league points
+            <%= leagueData[0].tier %> <%=divisionData.division%>, <%=leagueData[0].name%>. <%=divisionData.leaguePoints%> league points
         </p>
+        <% } %>
     </div>
     <footer class="card__footer">
         <span class="icon icon--time">last time played, <%=d.lastTimePlayedHuman%> ago</span>
