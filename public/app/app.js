@@ -19,6 +19,7 @@ $(function() {
         summonerSummaryData: [],
         summonerLeagueData: [],
         latestVersion: '',
+        averageKDA: null,
         selectors: {
             summonerInfoTemplate: '#template_summonerInfo',
             summonerInfoContainer: '#summonerInfoContainer',
@@ -42,6 +43,10 @@ $(function() {
                 if(_.isEmpty(data)) {
                     console.log('That summoner does not exist!');
                 } else {
+                    var averageChampionsKillsArray = [];
+                    var averageNumDeathsArray = [];
+                    var averageAssists = [];
+                    var averageKDAArray = [];
                     console.log(data.response.summonerBaseInfo.name);
                     d.summonerName = data.response.summonerBaseInfo.name;
                     d.summonerId = data.response.summonerBaseInfo.id;
@@ -52,10 +57,34 @@ $(function() {
                     d.lastPlayedChampion = data.response.lastPlayed.key;
                     d.summonerSummaryData = data.response.summonerSummaryData;
                     d.summonerLeagueData = data.response.summonerLeagueData;
+
+                    var i,
+                        j,
+                        numKills,
+                        numDeaths,
+                        numAssists,
+                        averageKDA;
+                        averageKDAArray;
+                    for(i = 0; j = data.response.summonerRecentStatistics.length, i < j; i ++) {
+
+                        numKills = data.response.summonerRecentStatistics[i].stats.championsKilled ? data.response.summonerRecentStatistics[i].stats.championsKilled : 0;
+                        numAssists = data.response.summonerRecentStatistics[i].stats.assists ? data.response.summonerRecentStatistics[i].stats.assists : 0;
+                        numDeaths = data.response.summonerRecentStatistics[i].stats.numDeaths ? data.response.summonerRecentStatistics[i].stats.numDeaths: 1;
+
+                        averageKDA = (numKills + numAssists) / numDeaths;
+                        averageKDAArray.push(averageKDA);
+                    }
+
+                    d.averageKDA = (sumArray(averageKDAArray) / averageKDAArray.length).toFixed(1);
+
+                    console.log(averageKDAArray);
+
+
                     render(d.selectors.summonerInfoTemplate, d.selectors.summonerInfoContainer);
                     $('#tab1').hide();
                     $('#tab2').show();
                     window.location = '/#/tab2';
+
                 }
             }).success(function(result) {
                 console.log(result);
@@ -81,6 +110,17 @@ $(function() {
                 window.location = '/#/tab1';
             }
         });
+    }
+
+    function sumArray(array) {
+        var sum = 0;
+        for (var i = 0, n = array.length; i < n; i++) {
+            if(array[i] == undefined) {
+                array[i] = 0;
+            }
+            sum += array[i];
+        }
+        return sum;
     }
 
     function changeTab () {

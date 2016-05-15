@@ -49,6 +49,8 @@
                 </tr>
             </table>
         </div>
+
+        Average KDA: <%=d.averageKDA%>
         <% var leagueData = d.summonerLeagueData[d.summonerId] %>
         <% if(leagueData) { %>
         <% var divisionData = _.findWhere(leagueData[0].entries, {playerOrTeamId: leagueData[0].participantId}) %>
