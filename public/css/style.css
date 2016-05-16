@@ -11,7 +11,7 @@ body {
     font-family: 'Open sans';
     font-size: 16px;
     line-height: 1.4;
-    background: #d8e0e5;
+    background: #FFFFFF;
 }
 
 .card {
@@ -34,11 +34,11 @@ body {
     text-decoration: none;
 }
 
-.card__date {
-    background: #08c;
+.card__level_container {
+    background: #e67e22;
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 10px;
+    left: 10px;
     width: 45px;
     height: 45px;
     border-radius: 50%;
@@ -48,14 +48,20 @@ body {
     font-weight: bold;
     padding-top: 10px;
 }
-.card__date__day {
+.card__level__lvl_number {
     display: block;
     font-size: 14px;
 }
-.card__date__month {
+.card__level_title {
     display: block;
     font-size: 10px;
     text-transform: uppercase;
+}
+
+.card__tier {
+    position: absolute;
+    top: -80px;
+    right: -75px;
 }
 
 .card__thumb {

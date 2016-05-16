@@ -1,10 +1,21 @@
+<% var leagueData = d.summonerLeagueData[d.summonerId] %>
+<% if(leagueData) { %>
+    <% var divisionData = _.findWhere(leagueData[0].entries, {playerOrTeamId: leagueData[0].participantId}) %>
+<%}%>
 <article class="card">
     <header class="card__thumb">
         <img src="http://ddragon.leagueoflegends.com/cdn/img/champion/loading/<%=d.lastPlayedChampion%>_0.jpg">
     </header>
-    <div class="card__date">
-        <span class="card__date__day"><%=d.summonerLevel%></span>
-        <span class="card__date__month">Lvl</span>
+    <div class="card__level_container">
+        <span class="card__level__lvl_number"><%=d.summonerLevel%></span>
+        <span class="card__level_title">Lvl</span>
+    </div>
+    <div class="card__tier">
+        <% if(leagueData) { %>
+            <img src="../../public/images/tier/<%= leagueData[0].tier %>_<%=divisionData.division%>.png">
+        <% } else { %>
+            <img src="../../public/images/tier/unknown.png">
+        <% } %>
     </div>
     <div class="card__body">
         <div class="card__category"><%=d.summonerName%></div>
@@ -51,13 +62,8 @@
         </div>
 
         Average KDA: <%=d.averageKDA%>
-        <% var leagueData = d.summonerLeagueData[d.summonerId] %>
-        <% if(leagueData) { %>
-        <% var divisionData = _.findWhere(leagueData[0].entries, {playerOrTeamId: leagueData[0].participantId}) %>
         <p class="card__description">
-            <%= leagueData[0].tier %> <%=divisionData.division%>, <%=leagueData[0].name%>. <%=divisionData.leaguePoints%> league points
         </p>
-        <% } %>
     </div>
     <footer class="card__footer">
         <div class="icon--time"></div>
