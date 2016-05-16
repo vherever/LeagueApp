@@ -63,10 +63,15 @@
 
         Average KDA: <%=d.averageKDA%>
         <p class="card__description">
+            Top champions:
+            <% console.log(d.summonerTopChampions) %>
+            <% _.each(d.summonerTopChampions, function(i) { %>
+                <%=i.championId%>
+            <% }) %>
         </p>
     </div>
     <footer class="card__footer">
         <div class="icon--time"></div>
-        <div>last time played, <%=d.lastTimePlayedHuman%> ago</div>
+        <div>last time played, <%=d.lastTimePlayedHuman%> ago with <b><%=d.lastPlayedChampion%></b></div>
     </footer>
 </article>

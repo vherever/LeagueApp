@@ -15,11 +15,13 @@ $(function() {
         lastTimePlayed: null, // runtime
         lastTimePlayedHuman: null,
         lastPlayedChampion: '',
-        freeChampionsRotation: [],
+        championsList: [],
         summonerSummaryData: [],
         summonerLeagueData: [],
         latestVersion: '',
         averageKDA: null,
+        summonerTopChampions: [],
+        allChampions: [],
         selectors: {
             summonerInfoTemplate: '#template_summonerInfo',
             summonerInfoContainer: '#summonerInfoContainer',
@@ -57,6 +59,8 @@ $(function() {
                     d.lastPlayedChampion = data.response.lastPlayed.key;
                     d.summonerSummaryData = data.response.summonerSummaryData;
                     d.summonerLeagueData = data.response.summonerLeagueData;
+                    d.summonerTopChampions = data.response.summonerTopChampions;
+
 
                     var i,
                         j,
@@ -64,7 +68,6 @@ $(function() {
                         numDeaths,
                         numAssists,
                         averageKDA;
-                        averageKDAArray;
                     for(i = 0; j = data.response.summonerRecentStatistics.length, i < j; i ++) {
 
                         numKills = data.response.summonerRecentStatistics[i].stats.championsKilled ? data.response.summonerRecentStatistics[i].stats.championsKilled : 0;
@@ -103,9 +106,9 @@ $(function() {
             if(_.isEmpty(data)) {
                 console.log('This user does not exist!');
             } else {
-                d.freeChampionsRotation = data;
+                d.championsList = data;
                 d.latestVersion = data.latestVersion;
-                console.log(d.freeChampionsRotation);
+                console.log(d.championsList);
                 render(d.selectors.freeChampionsTemplate, d.selectors.freeChampionsContainer);
                 window.location = '/#/tab1';
             }
