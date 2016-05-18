@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var app = express();
 var cons = require('consolidate');
 var fs = require('fs');
+var _ = require('underscore');
 
 var LolApi = require('leagueapi');
 
@@ -37,7 +38,9 @@ var d = {
     summonerLeagueData: [],
     latestVersion: '',
     allChampions: [],
-    summonerTopChampions: []
+    summonerTopChampions: [],
+    allChampionsMap: [],
+    topChampionsByName: []
 };
 
     app.get('/', function(req, res) {
@@ -51,8 +54,18 @@ var d = {
 
         request('http://ddragon.leagueoflegends.com/cdn/6.9.1/data/en_US/champion.json', function (error, response, body) {
             if (!error && response.statusCode == 200) {
-                console.log(body);
                 d.allChampions = JSON.parse(body);
+
+                d.allChampionsMap = _.map(d.allChampions.data, function(character) {
+                    return {
+                        'id': character.key,
+                        'name': character.id
+                    }
+                });
+
+
+
+
             }
         });
 
@@ -95,6 +108,22 @@ var d = {
 
                 LolApi.ChampionMastery.getTopChampions(d.summonerBaseInfo.id, 5).then(function(summonerTopChampions) {
                     d.summonerTopChampions = summonerTopChampions;
+                    d.topChampionsByName = [];
+                    var n,
+                        m,
+                        k,
+                        p;
+
+                    for(n = 0; k = d.summonerTopChampions.length, n < k; n ++) {
+                        for(m = 0; p = d.allChampionsMap.length, m < p; m ++) {
+                            if(d.summonerTopChampions[n].championId == d.allChampionsMap[m].id) {
+                                d.topChampionsByName.push(d.allChampionsMap[m].name);
+                            }
+                        }
+                    }
+
+                    console.log(d.topChampionsByName);
+
                 });
 
                 LolApi.getRecentGames(d.summonerBaseInfo.id, getSummonerInfo);
@@ -116,6 +145,8 @@ var d = {
             }, function (error) {
                 res.send(error);
             });
+
+
     });
 
 // run server

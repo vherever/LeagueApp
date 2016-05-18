@@ -67,10 +67,9 @@
                 <%= leagueData[0].tier %> <%=divisionData.division%>, <%=leagueData[0].name%>. <%=divisionData.leaguePoints%> league points<br>
             <% } %>
 
-            Top champions:
-            <% console.log(d.summonerTopChampions) %>
-            <% _.each(d.summonerTopChampions, function(i) { %>
-                <%=i.championId%>
+            Top champions:<br>
+            <% _.each(d.topChampionsByName, function(i) { %>
+                <img class="top__champion" src="http://ddragon.leagueoflegends.com/cdn/<%=d.championsList.latestVersion%>/img/champion/<%-i%>.png">
             <% }) %>
         </p>
     </div>

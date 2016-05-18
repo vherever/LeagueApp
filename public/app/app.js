@@ -21,8 +21,6 @@ $(function() {
         latestVersion: '',
         averageKDA: null,
         summonerTopChampions: [],
-        allChampions: [],
-        allChampionsMap: [],
         topChampionsByName: [],
         selectors: {
             summonerInfoTemplate: '#template_summonerInfo',
@@ -35,7 +33,7 @@ $(function() {
 
 
 
-    $('.ui.loading.search').removeClass('loading');
+    // $('.ui.loading.search').removeClass('loading');
     $('#search').on('keyup', function(e) {
         if(e.keyCode == 13) {
             //$('.ui.search').addClass('loading');
@@ -51,6 +49,7 @@ $(function() {
                     var averageNumDeathsArray = [];
                     var averageAssists = [];
                     var averageKDAArray = [];
+                    var topChampsByName = [];
                     console.log(data.response.summonerBaseInfo.name);
                     d.summonerName = data.response.summonerBaseInfo.name;
                     d.summonerId = data.response.summonerBaseInfo.id;
@@ -62,6 +61,7 @@ $(function() {
                     d.summonerSummaryData = data.response.summonerSummaryData;
                     d.summonerLeagueData = data.response.summonerLeagueData;
                     d.summonerTopChampions = data.response.summonerTopChampions;
+                    d.topChampionsByName = data.response.topChampionsByName;
 
 
                     var i,
@@ -81,21 +81,6 @@ $(function() {
                     }
 
                     d.averageKDA = (sumArray(averageKDAArray) / averageKDAArray.length).toFixed(1);
-
-                    console.log('top', d.summonerTopChampions);
-
-                    for(var ii = 0; ii < d.summonerTopChampions.length; ii ++) {
-                        for(var jj = 0; jj < d.allChampionsMap.length; jj ++) {
-                            if(d.summonerTopChampions[ii].championId == d.allChampionsMap[jj].id) {
-                                d.topChampionsByName.push(d.allChampionsMap[jj].name);
-                            }
-                        }
-                        console.log('lalala', d.summonerTopChampions[ii].championId);
-                    }
-
-                    console.log('byName', d.topChampionsByName);
-                    console.log('ALLMAP', d.allChampionsMap);
-
 
                     render(d.selectors.summonerInfoTemplate, d.selectors.summonerInfoContainer);
                     $('#tab1').hide();
@@ -127,13 +112,6 @@ $(function() {
                 console.log('allChampions', d.championsList.allChampions.data);
                 render(d.selectors.freeChampionsTemplate, d.selectors.freeChampionsContainer);
                 window.location = '/#/tab1';
-
-                d.allChampionsMap = _.map(d.championsList.allChampions.data, function(character) {
-                    return {
-                        'id': character.key,
-                        'name': character.name
-                    }
-                });
             }
         });
     }
