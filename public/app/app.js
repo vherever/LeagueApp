@@ -22,6 +22,8 @@ $(function() {
         averageKDA: null,
         summonerTopChampions: [],
         allChampions: [],
+        allChampionsMap: [],
+        topChampionsByName: [],
         selectors: {
             summonerInfoTemplate: '#template_summonerInfo',
             summonerInfoContainer: '#summonerInfoContainer',
@@ -80,13 +82,27 @@ $(function() {
 
                     d.averageKDA = (sumArray(averageKDAArray) / averageKDAArray.length).toFixed(1);
 
-                    console.log(averageKDAArray);
+                    console.log('top', d.summonerTopChampions);
+
+                    for(var ii = 0; ii < d.summonerTopChampions.length; ii ++) {
+                        for(var jj = 0; jj < d.allChampionsMap.length; jj ++) {
+                            if(d.summonerTopChampions[ii].championId == d.allChampionsMap[jj].id) {
+                                d.topChampionsByName.push(d.allChampionsMap[jj].name);
+                            }
+                        }
+                        console.log('lalala', d.summonerTopChampions[ii].championId);
+                    }
+
+                    console.log('byName', d.topChampionsByName);
+                    console.log('ALLMAP', d.allChampionsMap);
 
 
                     render(d.selectors.summonerInfoTemplate, d.selectors.summonerInfoContainer);
                     $('#tab1').hide();
                     $('#tab2').show();
                     window.location = '/#/tab2';
+
+
 
                 }
             }).success(function(result) {
@@ -112,14 +128,12 @@ $(function() {
                 render(d.selectors.freeChampionsTemplate, d.selectors.freeChampionsContainer);
                 window.location = '/#/tab1';
 
-                var fff = _.map(d.championsList.allChampions.data, function(character) {
+                d.allChampionsMap = _.map(d.championsList.allChampions.data, function(character) {
                     return {
                         'id': character.key,
                         'name': character.name
                     }
                 });
-                console.log('fff', fff);
-
             }
         });
     }
