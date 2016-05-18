@@ -76,6 +76,7 @@ var d = {
     });
 
     app.get('/searching', function (req, res) {
+        d.summonerLeagueData = [];
         var val = req.query.search;
         LolApi.Summoner.getByName(val)
             .then(function (summoner) {

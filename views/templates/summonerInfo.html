@@ -63,6 +63,10 @@
 
         Average KDA: <%=d.averageKDA%>
         <p class="card__description">
+            <% if(leagueData) { %>
+                <%= leagueData[0].tier %> <%=divisionData.division%>, <%=leagueData[0].name%>. <%=divisionData.leaguePoints%> league points<br>
+            <% } %>
+
             Top champions:
             <% console.log(d.summonerTopChampions) %>
             <% _.each(d.summonerTopChampions, function(i) { %>
