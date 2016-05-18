@@ -108,9 +108,18 @@ $(function() {
             } else {
                 d.championsList = data;
                 d.latestVersion = data.latestVersion;
-                console.log(d.championsList);
+                console.log('allChampions', d.championsList.allChampions.data);
                 render(d.selectors.freeChampionsTemplate, d.selectors.freeChampionsContainer);
                 window.location = '/#/tab1';
+
+                var fff = _.map(d.championsList.allChampions.data, function(character) {
+                    return {
+                        'id': character.key,
+                        'name': character.name
+                    }
+                });
+                console.log('fff', fff);
+
             }
         });
     }
