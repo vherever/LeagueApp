@@ -69,7 +69,12 @@
 
             Top champions:<br>
             <% _.each(d.topChampionsByName, function(i) { %>
-                <img class="top__champion" src="http://ddragon.leagueoflegends.com/cdn/<%=d.championsList.latestVersion%>/img/champion/<%-i%>.png">
+                <span class="top__champion_container">
+                    <img class="top__champion" src="http://ddragon.leagueoflegends.com/cdn/<%=d.championsList.latestVersion%>/img/champion/<%-i.name%>.png">
+                    <span class="champion__level_wrapper">
+                        <span class="champion__level"><%-i.level%></span>
+                    </span>
+                </span>
             <% }) %>
         </p>
     </div>

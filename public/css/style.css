@@ -290,6 +290,29 @@ body {
 
 .top__champion {
     display: inline-block;
-    max-width: 50px;
-    border-radius: 25px;
+    max-width: 55px;
+    border-radius: 27px;
+    z-index: 1;
+    border: 3px solid #E67E22;
+}
+.top__champion_container {
+    position: relative;
+    margin-left: 5px;
+}
+.champion__level_wrapper {
+    width: 20px;
+    height: 20px;
+    background: #E67E22;
+    position: absolute;
+    top: 0px;
+    left: 36px;
+    border-radius: 10px;
+    z-index: -1;
+}
+.champion__level {
+    position: absolute;
+    top: -2px;
+    right: 5px;
+    font-size: 11px;
+    color: #fff;
 }

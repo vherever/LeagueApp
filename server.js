@@ -113,17 +113,13 @@ var d = {
                         m,
                         k,
                         p;
-
                     for(n = 0; k = d.summonerTopChampions.length, n < k; n ++) {
                         for(m = 0; p = d.allChampionsMap.length, m < p; m ++) {
                             if(d.summonerTopChampions[n].championId == d.allChampionsMap[m].id) {
-                                d.topChampionsByName.push(d.allChampionsMap[m].name);
+                                d.topChampionsByName.push({name: d.allChampionsMap[m].name, level: d.summonerTopChampions[n].championLevel});
                             }
                         }
                     }
-
-                    console.log(d.topChampionsByName);
-
                 });
 
                 LolApi.getRecentGames(d.summonerBaseInfo.id, getSummonerInfo);
