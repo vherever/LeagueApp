@@ -4,12 +4,22 @@
 <%}%>
 <article class="card">
     <header class="card__thumb">
-        <img src="http://ddragon.leagueoflegends.com/cdn/img/champion/loading/<%=d.lastPlayedChampion%>_0.jpg">
+        <img class="last_played_champion" src="http://ddragon.leagueoflegends.com/cdn/img/champion/loading/<%=d.lastPlayedChampion%>_0.jpg">
     </header>
-    <div class="card__level_container">
-        <span class="card__level__lvl_number"><%=d.summonerLevel%></span>
-        <span class="card__level_title">Lvl</span>
+    <div class="left_panel_container card__thumb">
+        <img class="summoner_icon" src="http://ddragon.leagueoflegends.com/cdn/<%=d.championsList.latestVersion%>/img/profileicon/<%=d.profileIconId%>.png">
+
+        <div class="card__level_container">
+            <span class="card__round_info_number"><%=d.summonerLevel%></span>
+            <span class="card__round_info_title">Lvl</span>
+        </div>
+
+        <div class="card__kda_container">
+            <span class="card__round_info_number"><%=d.averageKDA%></span>
+            <span class="card__round_info_title">KDA</span>
+        </div>
     </div>
+
     <div class="card__tier">
         <% if(leagueData) { %>
             <img src="../../public/images/tier/<%= leagueData[0].tier %>_<%=divisionData.division%>.png">
@@ -17,8 +27,9 @@
             <img src="../../public/images/tier/unknown.png">
         <% } %>
     </div>
+
     <div class="card__body">
-        <div class="card__category"><%=d.summonerName%></div>
+        <div class="summoner__name"><%=d.summonerName%></div>
         <!--<div class="card__title"><a href="#">Vivamus elementum semper nisivi troscup</a></div>-->
         <div class="card__subtitle">
             <table width="100%" class="summonerShortStatistics">
@@ -61,7 +72,6 @@
             </table>
         </div>
 
-        Average KDA: <%=d.averageKDA%>
         <p class="card__description">
             <% if(leagueData) { %>
                 <%= leagueData[0].tier %> <%=divisionData.division%>, <%=leagueData[0].name%>. <%=divisionData.leaguePoints%> league points<br>

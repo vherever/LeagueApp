@@ -37,8 +37,8 @@ body {
 .card__level_container {
     background: #e67e22;
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 97px;
+    left: 7px;
     width: 45px;
     height: 45px;
     border-radius: 50%;
@@ -48,14 +48,30 @@ body {
     font-weight: bold;
     padding-top: 10px;
 }
-.card__level__lvl_number {
+.card__round_info_number {
     display: block;
     font-size: 14px;
 }
-.card__level_title {
+.card__round_info_title {
     display: block;
     font-size: 10px;
     text-transform: uppercase;
+}
+
+
+.card__kda_container {
+    background: #d35400;
+    position: absolute;
+    top: 148px;
+    left: 7px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+    line-height: 13px;
+    font-weight: bold;
+    padding-top: 10px;
 }
 
 .card__tier {
@@ -72,7 +88,6 @@ body {
     transition: height 0.3s;
 }
 .card__thumb img {
-    margin: 0 auto;
     display: block;
     opacity: 1;
     -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
@@ -81,6 +96,9 @@ body {
     transition: opacity 0.3s, transform 0.3s, -webkit-transform 0.3s;
     -webkit-transform: scale(1);
     transform: scale(1);
+}
+.card__thumb img.last_played_champion {
+    margin: 0 auto;
 }
 .card:hover .card__thumb img {
     opacity: 0.6;
@@ -102,7 +120,7 @@ body {
     height: 330px;
 }
 
-.card__category {
+.summoner__name {
     position: absolute;
     top: -25px;
     left: 0;
@@ -113,7 +131,7 @@ body {
     font-size: 11px;
     line-height: 25px;
 }
-.card__category a {
+.summoner__name a {
     color: #fff;
     text-decoration: none;
     text-transform: uppercase;
@@ -315,4 +333,22 @@ body {
     right: 5px;
     font-size: 11px;
     color: #fff;
+}
+
+img.summoner_icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 82px;
+    border-right: 3px solid #0A0911;
+    border-bottom: 3px solid #07060B;
+}
+.left_panel_container {
+    background: transparent;
+    width: 100px;
+    height: 235px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
 }
